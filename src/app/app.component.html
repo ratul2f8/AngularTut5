@@ -1,0 +1,126 @@
+<div class="container">
+    <h3>Payment form</h3>
+    <div class="row">
+        <div class="form-group col">
+            <label class="form-label">Payee Name</label>
+            <input [value]="name" (input)="onNameChange($event)" class="form-control "/>
+        </div>
+        <div class="col">
+            <label class="form-label"><b>Name</b></label>
+            <div *ngIf="name.trim() !== ''">
+                {{name | titlecase }}
+            </div>
+            <div *ngIf="name.trim() === ''">
+                Your name will appear here!
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="form-group col">
+            <label class="form-label">Payment Date</label>
+            <input type="date" [value]="date" (input)="onDateChange($event)" class="form-control "/>
+        </div>
+        <div class="col">
+            <label class="form-label"><b>Payment Date</b></label>
+            <div *ngIf="date.trim() !== ''">
+                {{date | date }} or 
+                {{date | date : "fullDate" }}
+            </div>
+            <div *ngIf="date.trim() === ''">
+                Payment date will appear here!
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col">
+            <label class="form-label">Currency(USD)</label>
+            <input type="number" [value]="currency" (input)="onCurrencyChange($event)" class="form-control "/>
+        </div>
+        <div class="col">
+            <label class="form-label"><b>Currency</b></label>
+            <div *ngIf="currency.trim() !== ''">
+                {{currency | currency }} or 
+                {{currency | currency : "EUR" }} or
+                {{currency | currency : "BDT" }}
+            </div>
+            <div *ngIf="currency.trim() === ''">
+                Currency in USD/EUR/TAKA will appear here!
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col">
+            <label class="form-label">Currency(USD)</label>
+            <input type="number" [value]="currency" (input)="onCurrencyChange($event)" class="form-control "/>
+        </div>
+        <div class="col">
+            <label class="form-label"><b>Currency</b></label>
+            <div *ngIf="currency.trim() !== ''">
+                {{currency | currency }} or 
+                {{currency | currency : "EUR" }} or
+                {{currency | currency : "BDT" }}
+            </div>
+            <div *ngIf="currency.trim() === ''">
+                Currency in USD/EUR/TAKA will appear here!
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col">
+            <label class="form-label">Kilometer(s)<sub>custom pipe with sequential execution</sub></label>
+            <input type="number" [value]="mileage" (input)="onMileageChange($event)" class="form-control "/>
+        </div>
+        <div class="col">
+            <label class="form-label"><b>Mile(s)</b></label>
+            <div *ngIf="mileage.trim() !== ''">
+                {{mileage | convert | number: "1.0-3" }}
+            </div>
+            <div *ngIf="mileage.trim() === ''">
+                Value in miles will appear here!
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col">
+            <label class="form-label">Enter weight in gram(s)<sub>custom pipe with args</sub></label>
+            <input type="number" [value]="weight" (input)="onWeightChange($event)" class="form-control "/>
+        </div>
+        <div class="col">
+            <label class="form-label"><b>Converted weights</b></label>
+            <div *ngIf="weight !== 0 && (weight | convertWeight : 'kg') < 1000">
+                {{weight | convertWeight: "kg"}} KG(s)
+            </div>
+            <div *ngIf="weight !== 0 && (weight | convertWeight : 'kg') >= 1000">
+                {{weight | convertWeight: "t"}} Ton(s)
+            </div>
+            <div *ngIf="weight === 0">
+                Converted weights will appear here!
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col">
+            <label class="form-label">Enter number</label>
+            <input type="number" [value]="number" (input)="onNumberChange($event)" class="form-control "/>
+        </div>
+        <div class="col">
+            <label class="form-label"><b>Number</b></label>
+            <div *ngIf="number.trim() !== ''">
+                <!-- how it works: <at least>.<at least> - <maximum> -->
+                Float: {{number | number: "1.1" }}, Integer:
+                {{number | number: "1.0-0"}}
+            </div>
+            <div *ngIf="number.trim() === ''">
+                Number in integer and float will appaer here!
+            </div>
+        </div>
+    </div>
+    {{car | json}}
+</div>
